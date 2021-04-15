@@ -229,6 +229,10 @@ class ImageProjection : public ParamServer {
       cloudHeader = currentCloudMsg.header;
     } else if (sensor == SensorType::RSLIDAR) {
       pcl::moveFromROSMsg(currentCloudMsg, *tmpRsLiDARCloudIn);
+      // RSLiDAR驱动是organized
+      //      std::cout << tmpRsLiDARCloudIn->height << " : "
+      //                << tmpRsLiDARCloudIn->width << " : "
+      //                << tmpRsLiDARCloudIn->points.size() << std::endl;
       double scan_timestamp = tmpRsLiDARCloudIn->points.front().timestamp;
       for (size_t i = 0; i < tmpRsLiDARCloudIn->points.size(); i++) {
         if (!pcl_isfinite(tmpRsLiDARCloudIn->points[i].x)) continue;
