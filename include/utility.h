@@ -70,6 +70,7 @@ class ParamServer {
   string imuTopic;
   string odomTopic;
   string gpsTopic;
+  string rtkTopic;
 
   // Frames
   string lidarFrame;
@@ -156,6 +157,7 @@ class ParamServer {
     nh.param<std::string>("lio_sam/imuTopic", imuTopic, "imu_correct");
     nh.param<std::string>("lio_sam/odomTopic", odomTopic, "odometry/imu");
     nh.param<std::string>("lio_sam/gpsTopic", gpsTopic, "odometry/gps");
+    nh.param<std::string>("lio_sam/rtkTopic", rtkTopic, "/gnss");
 
     nh.param<std::string>("lio_sam/lidarFrame", lidarFrame, "base_link");
     nh.param<std::string>("lio_sam/baselinkFrame", baselinkFrame, "base_link");

@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
   nav_msgs
   message_generation
   visualization_msgs
+  rosbag
 )
 
 find_package(OpenMP REQUIRED)
@@ -100,3 +101,7 @@ target_link_libraries(${PROJECT_NAME}_mapOptmization ${catkin_LIBRARIES} ${PCL_L
 # IMU Preintegration
 add_executable(${PROJECT_NAME}_imuPreintegration src/imuPreintegration.cpp)
 target_link_libraries(${PROJECT_NAME}_imuPreintegration ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} gtsam)
+
+# GPS Visualization
+add_executable(gps_visualization src/gps_visualization.cpp)
+target_link_libraries(gps_visualization ${catkin_LIBRARIES} ${PCL_LIBRARIES} )
