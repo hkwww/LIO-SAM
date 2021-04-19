@@ -545,6 +545,22 @@ class mapOptimization : public ParamServer {
     return true;
   }
 
+  void SaveMappingTempData() {
+    // 创建文件夹
+    std::string temp_data_path =
+        std::getenv("HOME") + savePCDDirectory + "/temp_data";
+    if (!boost::filesystem::exists(temp_data_path)) {
+      boost::filesystem::create_directory(temp_data_path);
+    }
+    pcl::PointCloud<PointType>::Ptr key_cloud(new pcl::PointCloud<PointType>());
+    for (int i = 0; i < (int)cloudKeyPoses3D->size(); i++) {
+      *key_cloud += *cornerCloudKeyFrames[i];
+      *key_cloud += *surfCloudKeyFrames[i];
+      pcl::io::savePCDFileBinary(
+          temp_data_path + "/kf_" + std::to_string(i) + ".pcd", *key_cloud);
+    }
+  }
+
   void visualizeGlobalMapThread() {
     ros::Rate rate(0.2);
     while (ros::ok()) {
@@ -559,6 +575,11 @@ class mapOptimization : public ParamServer {
 
     if (!saveMapService(req, res)) {
       cout << "Fail to save map" << endl;
+      return;
+    }
+
+    if (saveTempData) {
+      SaveMappingTempData();
     }
   }
 

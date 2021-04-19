@@ -86,6 +86,7 @@ class ParamServer {
 
   // Save pcd
   bool savePCD;
+  bool saveTempData;
   string savePCDDirectory;
 
   // Lidar Sensor Configuration
@@ -171,6 +172,7 @@ class ParamServer {
     nh.param<float>("lio_sam/poseCovThreshold", poseCovThreshold, 25.0);
 
     nh.param<bool>("lio_sam/savePCD", savePCD, false);
+    nh.param<bool>("lio_sam/saveTempData", saveTempData, false);
     nh.param<std::string>("lio_sam/savePCDDirectory", savePCDDirectory,
                           "/Downloads/LOAM/");
 
